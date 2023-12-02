@@ -11,24 +11,23 @@ import java.util.regex.Pattern;
 
 public class Day2_p2 {
 
-    public static String treat(){
-        long totalPower=0;
-
+    public static String treat(String inputFilename) {
+        long totalPower = 0;
         try {
-            Resource resource = new ClassPathResource("d2_input.txt");
+            Resource resource = new ClassPathResource(inputFilename);
             File file = resource.getFile();
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line = null;
 
             Pattern pattern = Pattern.compile("(\\d+)\\s+(red|blue|green)");
-            int lineNumber=0;
-            while((line = bufferedReader.readLine())!= null) {
+            int lineNumber = 0;
+            while ((line = bufferedReader.readLine()) != null) {
                 String[] tirages = line.split(";");
                 lineNumber++;
                 int redMin = 0;
                 int blueMin = 0;
                 int greenMin = 0;
-                for (String tirage: tirages) {
+                for (String tirage : tirages) {
                     Matcher matcher = pattern.matcher(tirage);
                     while (matcher.find()) {
                         int number = Integer.parseInt(matcher.group(1));
@@ -47,14 +46,18 @@ public class Day2_p2 {
                         }
                     }
                 }
-                System.out.println(""+lineNumber+": "+" R:"+redMin+" G:"+greenMin+" B:"+blueMin+" - "+line);
-                totalPower+=redMin*greenMin*blueMin;
+                System.out.println(lineNumber + ": " + " R:" + redMin + " G:" + greenMin + " B:" + blueMin + " - " + line);
+                totalPower += (long) redMin * greenMin * blueMin;
             }
             bufferedReader.close();
-            System.out.println("totalPower="+totalPower);
-        }catch (Exception e){
+            System.out.println("totalPower=" + totalPower);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return String.valueOf(totalPower);
+    }
+
+    public static String treat() {
+        return treat("d2_input.txt");
     }
 }
