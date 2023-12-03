@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Builder
-public class Point {
+public class D3PartPosition {
     Integer value;
     Integer length;
     Integer startPosition;

@@ -2,7 +2,7 @@ package fr.insee.adventofcode2023;
 
 import fr.insee.adventofcode2023.utils.FileParserHelper;
 import fr.insee.adventofcode2023.utils.LineProcessor;
-import fr.insee.adventofcode2023.utils.Point;
+import fr.insee.adventofcode2023.utils.D3PartPosition;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,9 @@ import java.util.List;
 public class Day3_p2 implements LineProcessor, Day {
 
     int lineNumber = 0;
-    List<List<Point>> number_positions_length = new ArrayList<>();
+    //List of lines with for each line all the parts of the input
+    List<List<D3PartPosition>> number_positions_length = new ArrayList<>();
+    //List of lines with, for each line, the position of the symbols (Boolean.TRUE)
     List<List<Boolean>> symbols_positions = new ArrayList<>();
 
     public String treat() {
@@ -36,7 +38,7 @@ public class Day3_p2 implements LineProcessor, Day {
     public void processLine(String line) {
         boolean inNumber = false;
         Integer numberStart = -1;
-        List<Point> points = new ArrayList<>();
+        List<D3PartPosition> points = new ArrayList<>();
         List<Boolean> symbols = new ArrayList<>();
 
         number_positions_length.add(points);
@@ -55,7 +57,7 @@ public class Day3_p2 implements LineProcessor, Day {
                     inNumber = false;
                     Integer length = i - numberStart;
                     Integer value = Integer.valueOf(line.substring(numberStart, numberStart + length));
-                    Point p = Point.builder().length(length).startPosition(numberStart).value(value).build();
+                    D3PartPosition p = D3PartPosition.builder().length(length).startPosition(numberStart).value(value).build();
                     points.add(p);
                 }
 
@@ -71,7 +73,7 @@ public class Day3_p2 implements LineProcessor, Day {
         if (inNumber) {
             Integer length = line.length() - numberStart;
             Integer value = Integer.valueOf(line.substring(numberStart, numberStart + length));
-            Point p = Point.builder().length(length).startPosition(numberStart).value(value).build();
+            D3PartPosition p = D3PartPosition.builder().length(length).startPosition(numberStart).value(value).build();
             points.add(p);
         }
         // Print the collected positions and lengths
@@ -133,7 +135,7 @@ public class Day3_p2 implements LineProcessor, Day {
     Pair<Long, Long> findAdjacentPartForLine(int lineNumber, int pos) {
         long result = 0;
         long nb = 0;
-        for (Point p : number_positions_length.get(lineNumber)) {
+        for (D3PartPosition p : number_positions_length.get(lineNumber)) {
             int numberEndPos = p.getStartPosition() + p.getLength() - 1;
 
             if (
