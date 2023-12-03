@@ -24,7 +24,9 @@ public class Day3_p2 implements LineProcessor, Day {
     @Override
     public String treat(String inputFilename) {
         lineNumber = 0;
+        //Read the input; fills the structures
         FileParserHelper.parseFile(inputFilename, this);
+        //Compute result
         String sum = computeSum();
         System.out.println("sum=" + sum);
         return String.valueOf(sum);
