@@ -16,7 +16,7 @@ public class AdventOfCode2023Application implements CommandLineRunner {
     }
 
     @Autowired
-    @Qualifier("Day2_p2")
+    @Qualifier("Day3_p2")
     Day day;
     @Override
     public void run(String... args) {
