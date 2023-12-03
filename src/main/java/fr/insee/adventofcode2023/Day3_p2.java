@@ -87,7 +87,7 @@ public class Day3_p2 implements LineProcessor, Day {
                 if (isSymbol) {
                     System.out.println("TREAT symbol : pos=" + charPos);
                     //Check
-                    long result = getValTotal(lineNumber, charPos);
+                    long result = getGearRatioOfSymbol(lineNumber, charPos);
                     if (result != 0) System.out.println("\t ==> isOK=" + result);
                     if (result > 0) sum += result;
                 }
@@ -98,7 +98,13 @@ public class Day3_p2 implements LineProcessor, Day {
         return String.valueOf(sum);
     }
 
-    long getValTotal(int lineNumber, int position) {
+    /**
+     * Get the gear ratio for a symbol at line lineNumber, char position
+     * @param lineNumber
+     * @param position
+     * @return the gear ratio
+     */
+    long getGearRatioOfSymbol(int lineNumber, int position) {
         long resultat = 0;
         long totalContact = 0;
 
@@ -107,7 +113,7 @@ public class Day3_p2 implements LineProcessor, Day {
         for (Integer ligne: lignesAChecker ) {
             System.out.println("verify on line :"+ligne);
             if(ligne>=0 && ligne<symbols_positions.size()){
-                Pair<Long, Long> res = findAdjacentForLine(ligne, position);
+                Pair<Long, Long> res = findAdjacentPartForLine(ligne, position);
                 if (res.getLeft() > 0) {
                     totalContact+=res.getLeft();
                     long number = res.getRight();
@@ -122,7 +128,7 @@ public class Day3_p2 implements LineProcessor, Day {
 
     //First:  nombre de nombres adjacents sur une ligne
     //Second : le produit des nombres adjacents (ou zero si aucun n'a été trouvé)
-    Pair<Long, Long> findAdjacentForLine(int lineNumber, int pos) {
+    Pair<Long, Long> findAdjacentPartForLine(int lineNumber, int pos) {
         long result = 0;
         long nb = 0;
         for (Point p : number_positions_length.get(lineNumber)) {
