@@ -13,7 +13,7 @@ import java.util.List;
 public class Day3_p2 implements LineProcessor, Day {
 
     int lineNumber = 0;
-    //List of lines with for each line all the parts of the input
+    //List of lines with for each line all the parts/numbers of the input
     List<List<D3PartPosition>> number_positions_length = new ArrayList<>();
     //List of lines with, for each line, the position of the symbols (Boolean.TRUE)
     List<List<Boolean>> symbols_positions = new ArrayList<>();
